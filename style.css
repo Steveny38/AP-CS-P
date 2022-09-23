@@ -1,0 +1,63 @@
+.title{
+    text-align: center;
+}
+
+.container{
+    display: flex;
+    height: 5rem;
+}
+
+.player{
+    width: 50%;
+    text-align: center;
+}
+.comp{
+    width: 50%;
+    text-align: center;
+}
+.result{
+    text-align: center;
+    font-size: 4rem;
+    height: 5rem;
+    
+}
+.playerResult{
+    height: 3rem;
+}
+.compResult{height: 3rem;}
+
+#play{
+    background-color:antiquewhite;
+    margin:auto;
+    border: none;
+    position: relative;
+    height: 4rem;
+    width: 8rem;
+    display: block;
+    transition: all 1s;
+}
+#play:after{
+    top: 0;
+    left: 0;    
+    position: absolute;
+    
+    content: "";
+    height: 100%;
+    width: 0%;
+    background: rgb(216, 25, 216);
+    transition: all 1s;
+}
+.p{
+    position: relative;
+    z-index: 2;
+}
+#play:hover::after{
+    width: 100%;
+    color: black;
+    transition: all 1s;
+}
+.history{
+    position: absolute;
+    top: 5;
+    left: 1;
+}
