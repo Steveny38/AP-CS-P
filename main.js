@@ -1,4 +1,3 @@
-commands = ['rock', 'paper', 'scissor']
 let resultPlayer = ''
 let choose = false
 end = ''
@@ -40,108 +39,75 @@ DOM.paper.addEventListener('click', p)
 DOM.scissor.addEventListener('click', s)
 
 
-function roll(){
+function play(playerResult){
     if(choose == false){
         alert('Please Choose Input')
     } else{
+        commands = ['rock', 'paper', 'scissor']
         choose = false
-        resultComp = commands[Math.floor(Math.random()*3)]
-
-        console.log(resultPlayer)
-        console.log(resultComp)
-        DOM.comp.innerHTML = resultComp
-        DOM.player.innerHTML = resultPlayer
-        if(resultPlayer == 'rock'){
-            if(resultComp == 'rock'){
-            end = 'Tie'
-            console.log('Tie')  
-            hist.push('Tie')
-            DOM.result.innerHTML=`${end}`
-            
-            }
-            if(resultComp == 'paper'){
-                end = 'Lose'
-                console.log('Lose')  
-                hist.push('Lose')
-                DOM.result.innerHTML=`${end}`
-           
-            }
-            if(resultComp == 'scissor'){
-                end = 'Win'
-                console.log('Win')  
-                hist.push('Win')
-                DOM.result.innerHTML=`${end}`
-            
-            }
-        }
-    
-        else if(resultPlayer == 'paper'){
-            if(resultComp == 'rock'){
-                end = 'Win'
-            console.log('Win')  
-            hist.push('Win')
-            DOM.result.innerHTML=`${end}`
-                
-            }
-            if(resultComp == 'paper'){
-                end = 'Tie'
-            console.log('Tie')  
-            hist.push('Tie')
-            DOM.result.innerHTML=`${end}`
-                
-            }
-            if(resultComp == 'scissor'){
-                end = 'Lose'
-                console.log('Lose')  
-                hist.push('Lose')
-                DOM.result.innerHTML=`${end}`
-                
-            }
-        }
-    
-        else if(resultPlayer == 'scissor'){
-            if(resultComp == 'rock'){
-                end = 'Lose'
-                console.log('Lose')  
-                hist.push('Lose')
-                DOM.result.innerHTML=`${end}`
-                
-            }
-            if(resultComp == 'paper'){
-                end = 'Win'
-            console.log('Win')  
-            hist.push('Win')
-            DOM.result.innerHTML=`${end}`
-                
-            }
-            if(resultComp == 'scissor'){
-                end = 'Tie'
-                console.log('Tie')  
+        computerResult = commands[Math.floor(Math.random()*3)]
+        DOM.comp.innerHTML = computerResult
+        if(playerResult == "rock"){
+            if(computerResult == "rock"){
                 hist.push('Tie')
-                DOM.result.innerHTML=`${end}`
-               
+                DOM.result.innerHTML = 'Tie'
+            }
+            if(computerResult == "paper"){
+                hist.push('Lose')
+                DOM.result.innerHTML = 'Lose'
+            }
+            if(computerResult == "scissor"){
+                hist.push('Win')
+                DOM.result.innerHTML = 'Win'
             }
         }
-        
+        else if(playerResult == "paper"){
+            if(computerResult == "rock"){
+                hist.push('Win')
+                DOM.result.innerHTML = 'Win'
+            }
+            if(computerResult == "paper"){
+                hist.push('Tie')
+                DOM.result.innerHTML = 'Tie'
+            }
+            if(computerResult == "scissor"){
+                hist.push('Lose')
+                DOM.result.innerHTML = 'Lose'
+            }
+        }
+        else if(playerResult == "scissor"){
+            if(computerResult == "rock"){
+                hist.push('Lose')
+                DOM.result.innerHTML = 'Lose'
+            }
+            if(computerResult == "paper"){
+                hist.push('Win')
+                DOM.result.innerHTML = 'Win'
+            }
+            if(computerResult == "scissor"){
+                hist.push('Tie')
+                DOM.result.innerHTML = 'Tie'
+            }
+        }
+
+        DOM.history.innerHTML = ''
+        hist.forEach((el, index) => {
+            DOM.history.insertAdjacentHTML('beforeend', `<div> ${index+1}, ${el}</div>`)
+        })
     }
 
-    
-
-
-
 }
 
-function history(){
-    DOM.history.innerHTML = ''
-    hist.forEach((el, index) => {
-        DOM.history.insertAdjacentHTML('beforeend', `<div> ${index+1}, ${el}</div>`)
-    })
-}
+// function history(historyList){
+//     DOM.history.innerHTML = ''
+//     historyList.forEach((el, index) => {
+//         DOM.history.insertAdjacentHTML('beforeend', `<div> ${index+1}, ${el}</div>`)
+//     })
+// }
 
 
 
 
 DOM.play.addEventListener('click', function(){
-    roll()
-    history()
+    play(resultPlayer)
 })
