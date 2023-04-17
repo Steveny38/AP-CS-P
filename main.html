@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="title">ROCK PAPER SCISSORS</h1>
+
+    <div class="game">
+        <div class="container">
+            <div class="player">
+                <h2>YOU </h2>
+                <h2 id="playerResult"></h2>
+                
+            </div>
+            <div class="comp">
+                <h2>COMPUTER 💻</h2>
+                <h2 class="COMPUTER"></h2>
+                <h2 id="compResult"></h2>
+            </div>
+
+        </div>
+        <button class="choice" id="rock">ROCK</button>
+        <button class="choice" id="paper">PAPER</button>
+        <button class="choice" id="scissors">SCISSORS</button>
+        
+        <div id="result" class="result"></div>
+        <div class="history">
+            <h2 id="history"></h2>
+        </div>
+        
+        
+    </div>
+    <button id="play"><h2 class="p">
+        PLAY!
+    </h2>
+    </button>
+</body>
+
+</html>
+<script>
+    let resultPlayer = ''
+let choose = false
+end = ''
+DOM = {
+    'play': document.getElementById('play'),
+    'result': document.getElementById('result'),
+    'player': document.getElementById('playerResult'),
+    'comp': document.getElementById('compResult'),
+    'history': document.getElementById('history'),
+    'rock': document.getElementById('rock'),
+    'paper': document.getElementById('paper'),
+    'scissor': document.getElementById('scissors')
+}
+
+let hist = []
+
+function allButtons(name){
+    choose = true
+    DOM.player.innerHTML = `${name}`
+    DOM.comp.innerHTML = ""
+    DOM.result.innerHTML = ''
+}
+
+function r(){
+    resultPlayer = 'rock'
+    allButtons('rock')
+}
+function p(){
+    allButtons('paper')
+    resultPlayer = 'paper'
+}
+function s(){
+    allButtons('scissor')
+    resultPlayer = 'scissor'
+}
+
+DOM.rock.addEventListener('click', r)
+DOM.paper.addEventListener('click', p)
+DOM.scissor.addEventListener('click', s)
+
+
+function play(playerResult){
+    if(choose == false){
+        alert('Please Choose Input')
+    } else{
+        commands = ['rock', 'paper', 'scissor']
+        choose = false
+        computerResult = commands[Math.floor(Math.random()*3)]
+        DOM.comp.innerHTML = computerResult
+        if(playerResult == "rock"){
+            if(computerResult == "rock"){
+                hist.push('Tie')
+                DOM.result.innerHTML = 'Tie'
+            }
+            if(computerResult == "paper"){
+                hist.push('Lose')
+                DOM.result.innerHTML = 'Lose'
+            }
+            if(computerResult == "scissor"){
+                hist.push('Win')
+                DOM.result.innerHTML = 'Win'
+            }
+        }
+        else if(playerResult == "paper"){
+            if(computerResult == "rock"){
+                hist.push('Win')
+                DOM.result.innerHTML = 'Win'
+            }
+            if(computerResult == "paper"){
+                hist.push('Tie')
+                DOM.result.innerHTML = 'Tie'
+            }
+            if(computerResult == "scissor"){
+                hist.push('Lose')
+                DOM.result.innerHTML = 'Lose'
+            }
+        }
+        else if(playerResult == "scissor"){
+            if(computerResult == "rock"){
+                hist.push('Lose')
+                DOM.result.innerHTML = 'Lose'
+            }
+            if(computerResult == "paper"){
+                hist.push('Win')
+                DOM.result.innerHTML = 'Win'
+            }
+            if(computerResult == "scissor"){
+                hist.push('Tie')
+                DOM.result.innerHTML = 'Tie'
+            }
+        }
+
+        DOM.history.innerHTML = ''
+        hist.forEach((el, index) => {
+            DOM.history.insertAdjacentHTML('beforeend', `<div> ${index+1}, ${el}</div>`)
+        })
+    }
+
+}
+
+
+
+
+DOM.play.addEventListener('click', function(){
+    play(resultPlayer)
+})
+
+</script>
+<style>
+    .title{
+    text-align: center;
+}
+
+.container{
+    display: flex;
+    height: 5rem;
+}
+
+.player{
+    width: 50%;
+    text-align: center;
+}
+.comp{
+    width: 50%;
+    text-align: center;
+}
+.result{
+    text-align: center;
+    font-size: 4rem;
+    height: 5rem;
+    
+}
+.playerResult{
+    height: 3rem;
+}
+.compResult{height: 3rem;}
+
+#play{
+    background-color:antiquewhite;
+    margin:auto;
+    border: none;
+    position: relative;
+    height: 4rem;
+    width: 8rem;
+    display: block;
+    transition: all 1s;
+}
+#play:after{
+    top: 0;
+    left: 0;    
+    position: absolute;
+    
+    content: "";
+    height: 100%;
+    width: 0%;
+    background: rgb(216, 25, 216);
+    transition: all 1s;
+}
+.p{
+    position: relative;
+    z-index: 2;
+}
+#play:hover::after{
+    width: 100%;
+    color: black;
+    transition: all 1s;
+}
+.history{
+    position: absolute;
+    top: 5;
+    left: 1;
+}
+</style>
